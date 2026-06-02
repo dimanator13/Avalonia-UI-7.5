@@ -7,7 +7,7 @@ public interface IOrderService
 {
     IEnumerable<OrderItem> GetOrders();
 
-    OrderItem CreateOrder(ClientItem client);
+    OrderItem CreateOrder(string clientName);
 
     void DeleteOrder(OrderItem client);
     

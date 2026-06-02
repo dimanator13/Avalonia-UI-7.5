@@ -20,10 +20,10 @@ public class InMemoryClientService : IClientService
         return _clients;
     }
 
-    public ClientItem CreateClient()
+    public ClientItem CreateClient(string newClientName)
     {
         var client = new ClientItem(
-            "New client",
+            newClientName,
             "+0 000 000 00 00",
             "Email@Example.com",
             false);

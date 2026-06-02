@@ -7,7 +7,7 @@ public interface IProductService
 {
     IEnumerable<ProductItem> GetProducts();
 
-    ProductItem CreateProduct();
+    ProductItem CreateProduct(string newProductName);
 
     void DeleteProduct(ProductItem product);
 }

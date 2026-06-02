@@ -20,11 +20,11 @@ public class InMemoryOrderService : IOrderService
         return _orders;
     }
 
-    public OrderItem CreateOrder(ClientItem client)
+    public OrderItem CreateOrder(string clientName)
     {
         var order = new OrderItem(
             new Random().Next(100),
-            client.Name,
+            clientName,
             DateTimeOffset.Now,
             0,
             OrderStatus.New);

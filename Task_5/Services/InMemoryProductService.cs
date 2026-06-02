@@ -20,10 +20,10 @@ public class InMemoryProductService : IProductService
         return _products;
     }
 
-    public ProductItem CreateProduct()
+    public ProductItem CreateProduct(string name)
     {
         var product = new ProductItem(
-            "New product",
+            name,
             new Random().Next(100),
             ProductCategory.Other,
             0,

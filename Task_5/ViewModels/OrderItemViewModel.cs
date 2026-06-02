@@ -82,7 +82,7 @@ public class OrderItemViewModel : ViewModelBase
 
     public bool IsPaid => Status == OrderStatus.Paid;
     
-    public bool IsCanceled => Status == OrderStatus.Cancelled;
+    public bool IsCancelled => Status == OrderStatus.Cancelled;
     
     public bool IsNew => Status == OrderStatus.New;
     
@@ -90,8 +90,9 @@ public class OrderItemViewModel : ViewModelBase
 
     public void RefreshStatus()
     {
+        OnPropertyChanged(nameof(Status));
         OnPropertyChanged(nameof(IsPaid));
-        OnPropertyChanged(nameof(IsCanceled));
+        OnPropertyChanged(nameof(IsCancelled));
         OnPropertyChanged(nameof(IsNew));
         OnPropertyChanged(nameof(IsCompleted));
     }

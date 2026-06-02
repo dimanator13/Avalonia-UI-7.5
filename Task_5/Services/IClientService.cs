@@ -7,7 +7,7 @@ public interface IClientService
 {
     IEnumerable<ClientItem> GetClients();
 
-    ClientItem CreateClient();
+    ClientItem CreateClient(string newClientName);
 
     void DeleteClient(ClientItem client);
 }
