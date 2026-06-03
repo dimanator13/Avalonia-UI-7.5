@@ -40,6 +40,8 @@ public partial class ProductsViewModel : ViewModelBase
     [ObservableProperty] private string _newProductNameError = string.Empty;
 
     public bool HasNewProductNameError => !string.IsNullOrWhiteSpace(NewProductNameError);
+    
+    public event Action? ProductsChanged;
 
     public ProductsViewModel(IProductService productService)
     {
@@ -71,6 +73,8 @@ public partial class ProductsViewModel : ViewModelBase
         RefreshFilteredProducts();
         
         SelectedProduct = productViewModel;
+        
+        ProductsChanged?.Invoke();
     }
 
     [RelayCommand(CanExecute = nameof(HasSelectedProduct))]
@@ -85,6 +89,8 @@ public partial class ProductsViewModel : ViewModelBase
         SelectedProduct = null;
         
         RefreshFilteredProducts();
+        
+        ProductsChanged?.Invoke();
     }
     
     [RelayCommand]

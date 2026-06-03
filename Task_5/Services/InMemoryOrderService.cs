@@ -8,10 +8,10 @@ public class InMemoryOrderService : IOrderService
 {
     private readonly List<OrderItem> _orders;
 
-    public InMemoryOrderService(ClientItem client, IEnumerable<OrderItem>? orders = null)
+    public InMemoryOrderService(IEnumerable<OrderItem>? orders = null)
     {
         _orders = orders is null
-            ? CreateDefaultOrders(client)
+            ? CreateDefaultOrders()
             : new List<OrderItem>(orders);
     }
 
@@ -44,13 +44,13 @@ public class InMemoryOrderService : IOrderService
         order.Status = status;
     }
 
-    private static List<OrderItem> CreateDefaultOrders(ClientItem client)
+    private static List<OrderItem> CreateDefaultOrders()
     {
         return new List<OrderItem>
         {
             new OrderItem(
                 new Random().Next(100),
-                client.Name,
+                "-",
                 DateTimeOffset.Now,
                 0,
                 OrderStatus.New)

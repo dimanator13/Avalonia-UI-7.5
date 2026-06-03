@@ -28,6 +28,8 @@ public partial class ClientsViewModel : ViewModelBase
     [ObservableProperty] private string _newClientNameError = string.Empty;
 
     public bool HasNewClientNameError => !string.IsNullOrWhiteSpace(NewClientNameError);
+    
+    public event Action? ClientsChanged;
 
     public ClientsViewModel(IClientService clientService)
     {
@@ -59,6 +61,7 @@ public partial class ClientsViewModel : ViewModelBase
         
         SelectedClient = clientViewModel;
         
+        ClientsChanged?.Invoke();
     }
 
     [RelayCommand(CanExecute = nameof(HasSelectedClient))]
@@ -73,6 +76,8 @@ public partial class ClientsViewModel : ViewModelBase
         SelectedClient = null;
         
         RefreshFilteredClients();
+        
+        ClientsChanged?.Invoke();
     }
     
     private bool ValidateNewClientName()

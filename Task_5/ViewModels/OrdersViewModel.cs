@@ -40,6 +40,8 @@ public partial class OrdersViewModel : ViewModelBase
     [ObservableProperty] private string _newOrderClientNameError = string.Empty;
 
     public bool HasNewOrderClientNameError => !string.IsNullOrWhiteSpace(NewOrderClientNameError);
+    
+    public event Action? OrdersChanged;
 
     public OrdersViewModel(IOrderService orderService)
     {
@@ -51,6 +53,8 @@ public partial class OrdersViewModel : ViewModelBase
         }
         
         RefreshFilteredOrders();
+        
+        OrdersChanged?.Invoke();
     }
 
     [RelayCommand]
@@ -71,6 +75,8 @@ public partial class OrdersViewModel : ViewModelBase
         RefreshFilteredOrders();
         
         SelectedOrder = orderViewModel;
+        
+        OrdersChanged?.Invoke();
     }
 
     [RelayCommand(CanExecute = nameof(HasSelectedOrder))]
