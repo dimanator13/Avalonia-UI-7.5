@@ -7,4 +7,6 @@
              xmlns:vm="using:Task_5.ViewModels"
              x:DataType="vm:ClientsViewModel">
     
+    <TextBlock Text="Clients" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    
 </UserControl>

@@ -3,7 +3,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Task_5.ViewModels.HomeView"
+             x:Class="Task_5.Views.HomeView"
              xmlns:vm="using:Task_5.ViewModels"
              x:DataType="vm:HomeViewModel">
+    
+    <StackPanel Spacing="10">
+        <TextBlock Text="Welcome to Task_5!"/>
+        <TextBlock Text="Application for control Data"/>
+        <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="10" ColumnDefinitions="Auto, *" ColumnSpacing="10">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Products: "/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ProductsCount}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Clients: "/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ClientsCount}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Orders: "/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding OrdersCount}"/>
+        </Grid>
+    </StackPanel>
+    
 </UserControl>

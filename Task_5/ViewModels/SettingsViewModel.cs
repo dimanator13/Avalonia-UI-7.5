@@ -13,7 +13,9 @@ public partial class SettingsViewModel : ViewModelBase
     [RelayCommand]
     private void Apply()
     {
-        StatusMessage = "Changes applied!";
+        StatusMessage = $"Username: {UserName}\n" +
+                        $"Using dark theme: {(UseDarkTheme ? "Yes" : "No")}\n" +
+                        $"Show hints: {(ShowHints ? "Yes" : "No")}";
     }
 
     [RelayCommand]

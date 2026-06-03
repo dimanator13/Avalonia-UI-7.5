@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Task_5.Views.SettingsView"
+             xmlns:vm="using:Task_5.ViewModels"
+             x:DataType="vm:SettingsViewModel">
+    
+    <StackPanel Spacing="10">
+        <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="10" ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Username: " VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UserName}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Dark theme: " VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding UseDarkTheme}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Show hints: " VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding ShowHints}"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <StackPanel Spacing="10" Orientation="Horizontal">
+                <Button Content="Apply" Command="{Binding ApplyCommand}"/>
+                <Button Content="Reset" Command="{Binding ResetCommand}"/>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <TextBlock Text="{Binding StatusMessage}"/>
+        </Border>
+    </StackPanel>
+    
+</UserControl>

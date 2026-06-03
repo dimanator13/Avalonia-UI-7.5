@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Task_5.Views;
 
-public partial class HomeView : UserControl
+public partial class SettingsView : UserControl
 {
-    public HomeView()
+    public SettingsView()
     {
         InitializeComponent();
     }
