@@ -7,6 +7,51 @@
              xmlns:vm="using:Task_5.ViewModels"
              x:DataType="vm:ProductsViewModel">
     
-    <TextBlock Text="Products" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <Grid RowDefinitions="Auto, *, Auto" RowSpacing="10">
+        <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Search: "/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *" ColumnSpacing="10">
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <ListBox ItemsSource="{Binding FilteredProducts}" SelectedItem="{Binding SelectedProduct}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="10">
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Name: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedProduct.Name}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Code: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedProduct.Code}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Category: " VerticalAlignment="Center"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding ProductCategories}" SelectedItem="{Binding SelectedProduct.Category}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Price: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SelectedProduct.Price}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Stock quantity: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SelectedProduct.StockQuantity}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Minimum stock quantity: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding SelectedProduct.MinStockQuantity}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Created at: " VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" Grid.Row="6" SelectedDate="{Binding SelectedProduct.CreatedAt}"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                <TextBox Grid.Column="0" Text="{Binding NewProductName}"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+                    <Button Content="Add" Command="{Binding AddProductCommand}"/>
+                    <Button Content="Delete" Command="{Binding DeleteProductCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
     
 </UserControl>
