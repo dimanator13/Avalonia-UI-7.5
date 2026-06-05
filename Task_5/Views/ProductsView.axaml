@@ -10,7 +10,7 @@
     <Grid RowDefinitions="Auto, *, Auto" RowSpacing="10">
         <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
             <StackPanel Orientation="Horizontal" Spacing="10">
-                <TextBlock Text="Search: "/>
+                <TextBlock Text="Search: " VerticalAlignment="Center"/>
                 <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
             </StackPanel>
         </Border>
@@ -44,12 +44,13 @@
             </Border>
         </Grid>
         <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="10">
-            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
-                <TextBox Grid.Column="0" Text="{Binding NewProductName}"/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" RowDefinitions="*, Auto">
+                <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewProductName}"/>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Spacing="10">
                     <Button Content="Add" Command="{Binding AddProductCommand}"/>
                     <Button Content="Delete" Command="{Binding DeleteProductCommand}"/>
                 </StackPanel>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding NewProductNameError}" IsVisible="{Binding HasNewProductNameError}"/>
             </Grid>
         </Border>
     </Grid>

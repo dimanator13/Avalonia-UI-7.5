@@ -7,6 +7,48 @@
              xmlns:vm="using:Task_5.ViewModels"
              x:DataType="vm:ClientsViewModel">
     
-    <TextBlock Text="Clients" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <Grid RowDefinitions="Auto, *, Auto" RowSpacing="10">
+        <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Search: " VerticalAlignment="Center"/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *" ColumnSpacing="10">
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <ListBox ItemsSource="{Binding FilteredClients}" SelectedItem="{Binding SelectedClient}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="10">
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Name: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedClient.Name}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Phone: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedClient.Phone}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Email: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedClient.Email}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Vip: " VerticalAlignment="Center"/>
+                    <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding SelectedClient.IsVip}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Created at: " VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding SelectedClient.CreatedAt}"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" RowDefinitions="*, Auto">
+                <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewClientName}"/>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Spacing="10">
+                    <Button Content="Add" Command="{Binding AddClientCommand}"/>
+                    <Button Content="Delete" Command="{Binding DeleteClientCommand}"/>
+                </StackPanel>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding NewClientNameError}" IsVisible="{Binding HasNewClientNameError}"/>
+            </Grid>
+        </Border>
+    </Grid>
     
 </UserControl>
