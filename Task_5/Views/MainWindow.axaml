@@ -11,15 +11,15 @@
         Title="Task_5">
 
     <Window.DataTemplates>
-        <DataTemplate DataType="{x:Type vm:ProductItemViewModel}">
+        <DataTemplate DataType="{x:Type vm:ProductsViewModel}">
             <views:ProductsView/>
         </DataTemplate>
         
-        <DataTemplate DataType="{x:Type vm:ClientItemViewModel}">
+        <DataTemplate DataType="{x:Type vm:ClientsViewModel}">
             <views:ClientsView/>
         </DataTemplate>
         
-        <DataTemplate DataType="{x:Type vm:OrderItemViewModel}">
+        <DataTemplate DataType="{x:Type vm:OrdersViewModel}">
             <views:OrdersView/>
         </DataTemplate>
         

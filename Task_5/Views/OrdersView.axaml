@@ -5,8 +5,78 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Task_5.Views.OrdersView"
              xmlns:vm="using:Task_5.ViewModels"
-             x:DataType="vm:OrdersViewModel">
+             x:DataType="vm:OrdersViewModel"
+             xmlns:models="using:Task_5.Models">
     
-    <TextBlock Text="Orders" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <Grid RowDefinitions="Auto, *, Auto" RowSpacing="10">
+        <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Search: " VerticalAlignment="Center"/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+                <TextBlock Text="Filter: " VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding OrderStatuses}" SelectedItem="{Binding SelectedStatusFilter}"/>
+                <Button Content="Reset" Command="{Binding ResetStatusFilterCommand}"/>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto, *" ColumnSpacing="10">
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <ListBox ItemsSource="{Binding FilteredOrders}" SelectedItem="{Binding SelectedOrder}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Number}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Padding="10">
+                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto" ColumnSpacing="10" RowSpacing="10">
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="Number: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedOrder.Number}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Client name: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedOrder.ClientName}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Date: " VerticalAlignment="Center"/>
+                    <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding SelectedOrder.Date}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Amount: " VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SelectedOrder.Amount}"/>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Status: " VerticalAlignment="Center"/>
+                    <StackPanel Grid.Column="1" Grid.Row="4">
+                        <RadioButton GroupName="Status"
+                                     Content="New"
+                                     IsChecked="{Binding SelectedOrder.IsNew, Mode=OneWay}"
+                                     Command="{Binding ChangeOrderStatusCommand}"
+                                     CommandParameter="{x:Static models:OrderStatus.New}" />
+
+                        <RadioButton GroupName="Status"
+                                     Content="Paid"
+                                     IsChecked="{Binding SelectedOrder.IsPaid, Mode=OneWay}"
+                                     Command="{Binding ChangeOrderStatusCommand}"
+                                     CommandParameter="{x:Static models:OrderStatus.Paid}" />
+
+                        <RadioButton GroupName="Status"
+                                     Content="Cancelled"
+                                     IsChecked="{Binding SelectedOrder.IsCancelled, Mode=OneWay}"
+                                     Command="{Binding ChangeOrderStatusCommand}"
+                                     CommandParameter="{x:Static models:OrderStatus.Cancelled}" />
+
+                        <RadioButton GroupName="Status"
+                                     Content="Completed"
+                                     IsChecked="{Binding SelectedOrder.IsCompleted, Mode=OneWay}"
+                                     Command="{Binding ChangeOrderStatusCommand}"
+                                     CommandParameter="{x:Static models:OrderStatus.Completed}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="10">
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10" RowDefinitions="*, Auto">
+                <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewOrderClientName}"/>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Spacing="10">
+                    <Button Content="Add" Command="{Binding AddOrderCommand}"/>
+                    <Button Content="Delete" Command="{Binding DeleteOrderCommand}"/>
+                </StackPanel>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding NewOrderClientNameError}" IsVisible="{Binding HasNewOrderClientNameError}"/>
+            </Grid>
+        </Border>
+    </Grid>
     
 </UserControl>

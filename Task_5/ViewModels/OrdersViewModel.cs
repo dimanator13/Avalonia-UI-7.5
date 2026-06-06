@@ -91,6 +91,8 @@ public partial class OrdersViewModel : ViewModelBase
         SelectedOrder = null;
         
         RefreshFilteredOrders();
+        
+        OrdersChanged?.Invoke();
     }
 
     [RelayCommand(CanExecute = nameof(HasSelectedOrder))]
@@ -110,6 +112,7 @@ public partial class OrdersViewModel : ViewModelBase
     private void ResetStatusFilter()
     {
         SelectedStatusFilter = null;
+        SearchText = string.Empty;
     }
     
     private bool ValidateNewOrderClientName()
@@ -140,6 +143,8 @@ public partial class OrdersViewModel : ViewModelBase
     
     private void RefreshFilteredOrders()
     {
+        var selectedOrder = SelectedOrder;
+
         FilteredOrders.Clear();
 
         foreach (var order in Orders)
@@ -157,8 +162,12 @@ public partial class OrdersViewModel : ViewModelBase
                 FilteredOrders.Add(order);
             }
         }
-        
-        if (SelectedOrder is not null && !FilteredOrders.Contains(SelectedOrder))
+
+        if (selectedOrder is not null && FilteredOrders.Contains(selectedOrder))
+        {
+            SelectedOrder = selectedOrder;
+        }
+        else
         {
             SelectedOrder = null;
         }
